@@ -15,12 +15,9 @@ app.use(express.urlencoded({ extended: true }));
 
 const PORT = process.env.PORT || 3500;
 
-app.get('/hello', (req, res) => {
-    res.render('pages/index');
-})
 
 app.get('/', (req, res) => {
-    res.render('pages/searches/new')
+    res.render('pages/index')
 })
 
 app.post('/searches', (req, res) => {
@@ -40,6 +37,9 @@ app.post('/searches', (req, res) => {
         });
 })
 
+app.all('*', (request, response) => {
+    response.status(500).send('this page doesn`t exist !!');
+})
 
 app.listen(PORT, () => {
     console.log(`Listening to Port ${PORT}`);
